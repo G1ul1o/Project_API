@@ -1,0 +1,37 @@
+[
+  {
+    "animeName": "Attack on Titan",
+    "animeDescription": "In a world where humanity is on the brink of extinction due to man-eating giants, Eren and his friends join the military to fight back and uncover dark secrets.",
+    "avgRating": 0
+  },
+  {
+    "animeName": "Death Note",
+    "animeDescription": "A high school student discovers a mysterious notebook that allows him to kill anyone by writing their name in it, leading him into a deadly moral conflict.",
+    "avgRating": 0
+  },
+  {
+    "animeName": "Fullmetal Alchemist: Brotherhood",
+    "animeDescription": "Two brothers use alchemy in their quest to find the Philosopher’s Stone and restore their bodies after a tragic accident.",
+    "avgRating": 0
+  },
+  {
+    "animeName": "Demon Slayer",
+    "animeDescription": "After his family is slaughtered by demons and his sister is turned into one, Tanjiro joins the Demon Slayer Corps to avenge them and find a cure.",
+    "avgRating": 0
+  },
+  {
+    "animeName": "My Hero Academia",
+    "animeDescription": "In a world where nearly everyone has superpowers, a powerless boy dreams of becoming a hero and is mentored by the world's greatest superhero.",
+    "avgRating": 0
+  },
+  {
+    "animeName": "JoJo's Bizarre Adventure",
+    "animeDescription": "Each generation of the Joestar family faces bizarre adventures filled with supernatural abilities, ancient curses, and unforgettable villains.",
+    "avgRating": 0
+  },
+  {
+    "animeName": "Jujutsu Kaisen",
+    "animeDescription": "A high school student becomes a vessel for a powerful curse and joins a secret organization to fight against supernatural threats.",
+    "avgRating": 0
+  }
+]
