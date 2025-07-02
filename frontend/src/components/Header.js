@@ -9,7 +9,7 @@ function Header() {
         </Link>
         <nav className="nav">
         <Link to="/Login" className="nav-link">Login</Link>
-        <Link to="/UserList" className="nav-link">User List</Link>
+        <Link to="/UserList" className="nav-link">List anime</Link>
         </nav>
     </header>
   );
