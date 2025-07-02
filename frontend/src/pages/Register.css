@@ -38,6 +38,26 @@
   margin: 0 auto;
 }
 
+.register-google-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  background-color: #080a9a;
+  color: var(--text-color);
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-or-text {
+  color: var(--text-title);
+  font-weight: bold;
+  text-align: center;
+}
+
 .register-text {
   color: var(--text-color);
   font-style: italic;
@@ -65,6 +85,19 @@
 }
 
 .register-input:focus {
+  outline: 2px solid var(--hover-color);
+}
+
+.register-role-select {
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border-radius: 5px;
+  border: none;
+  background-color: #444;
+  color: var(--text-color);
+}
+
+.register-role-select:focus {
   outline: 2px solid var(--hover-color);
 }
 
