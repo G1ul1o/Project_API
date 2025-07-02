@@ -2,11 +2,11 @@
   --primary-bg: #3b3a3a;
   --text-color: white;
   --hover-color: #34c309;
-  --shadow-color: #196203;
+  --shadow-color: #228404;
 }
 
 .header {
-  position: sticky;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;

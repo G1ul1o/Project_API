@@ -10,6 +10,7 @@ function Header() {
         <nav className="nav">
         <Link to="/Login" className="nav-link">Login</Link>
         <Link to="/UserList" className="nav-link">List anime</Link>
+        <Link to="/List" className="nav-link">Search anime</Link>
         </nav>
     </header>
   );
