@@ -18,6 +18,9 @@ export default function Home() {
           <p>
             🔍 Use our anime search and list tools to explore our dataset, don't hesitate to contact us to improve it.
           </p>
+          <p>
+            📊 Rate your favorite anime and share your thoughts with the community.
+          </p>          
         </div>
         <div className="home-calltoaction">
           <p>

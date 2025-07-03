@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import UserList from './pages/User-list';
 import DetailAnime from './pages/Detail-anime';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import List from './pages/Anime-list';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
 
         <Route path="/List" element={<List />} />
       </Routes>
+      <Footer />
     </div>
   );  
 }
