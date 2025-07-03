@@ -40,4 +40,13 @@ app.post('/anime', async (req, res) => {
 }
 );
 
+app.get('/anime', async (req, res) => {
+    try {
+        const animes = await Anime.find();
+        res.status(200).json(animes);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch animes' });
+    }
+});
+
 app.listen(4001, () => console.log('Anime service running on http://localhost:4001'));
