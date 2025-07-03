@@ -49,4 +49,15 @@ app.get('/anime', async (req, res) => {
     }
 });
 
+app.get('/anime/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const anime = await Anime.findById(id);
+        if (!anime) return res.status(404).json({ error: 'Anime not found' });
+        res.status(200).json(anime);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch anime' });
+    }
+});
+
 app.listen(4001, () => console.log('Anime service running on http://localhost:4001'));

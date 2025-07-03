@@ -18,6 +18,8 @@ function App() {
         <Route path="/Register" element={<Register />} />
         <Route path="/UserList" element={<UserList />} />
         <Route path="/DetailAnime" element={<DetailAnime />} />
+        <Route path="/DetailAnime/:id" element={<DetailAnime />} />
+
         <Route path="/List" element={<List />} />
       </Routes>
     </div>
