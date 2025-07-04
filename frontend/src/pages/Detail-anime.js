@@ -9,7 +9,7 @@ export default function DetailAnime() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:4001/anime/${id}`)
+    fetch(`http://localhost:3001/user/anime/${id}`)
       .then(res => {
         if (!res.ok) throw new Error('Anime not found');
         return res.json();
@@ -34,7 +34,7 @@ export default function DetailAnime() {
       {anime.animeDescription != null && <p><strong>Description: </strong> {anime.animeDescription}</p>}
       {anime.avgRating != null && <p><strong>Mean score: </strong>{anime.avgRating}</p>}
 
-      <Link to="/" className="back-button">← Back to the list</Link>
+      <Link to="/List" className="back-button">← Back to the list</Link>
     </div>
   );
 }

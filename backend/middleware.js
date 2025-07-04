@@ -15,7 +15,6 @@ function Middleware(req, res, next) {
   next();
 }
 
-
 /*const { checkPrivilege } = require('../Authentification/Authentification.js');
 
 
@@ -75,10 +74,41 @@ userRouter.post("/login", async (req, res) => {
   }
 });
 
+userRouter.get("/anime", async (req, res) => {
+  try {
+    const response = await fetch("http://localhost:4001/anime", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    const data = await response.json();
+    res.status(response.status).json(data);
+  } catch (error) {
+    console.error("Erreur de communication avec l'API:", error);
+    res.status(500).json({ message: "Erreur serveur lors de la récupération des animes." });
+  }
+  });
+
+userRouter.get("/anime/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const response = await fetch(`http://localhost:4001/anime/${id}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    const data = await response.json();
+    res.status(response.status).json(data);
+  } catch (error) {
+    console.error("Erreur de communication avec l'API:", error);
+    res.status(500).json({ message: "Erreur serveur lors de la récupération de l'anime." });
+  }
+});
+
 app.use("/user", userRouter);
 
 
-const PORT = 3000;
+const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`🚀 Server is running at http://localhost:${PORT}`);
 });
