@@ -84,6 +84,7 @@ return (
                 <Link to={`/DetailAnime/${comment.animeId}`}>
                   <strong>{anime ? anime.animeName : 'Loading...'}</strong>
                 </Link>
+                <p>comment: {comment.commentText}   </p>
                 <p>Your Grade: {comment.grade}</p>
               </li>
             );
