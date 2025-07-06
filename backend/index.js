@@ -1,5 +1,5 @@
 const express = require('express');
-const authMiddleware = require('./middleware/authMiddleware');
+const { apiGatewayMiddlewareUser, apiGatewayMiddlewareAnime } = require('./middleware/authMiddleware');
 const cors = require('cors');
 
 const app = express();
@@ -12,7 +12,8 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
-app.use('/user', authMiddleware);
+app.use('/user', apiGatewayMiddlewareUser);
+app.use('/anime', apiGatewayMiddlewareAnime);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
