@@ -1,9 +1,10 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import './AjouterAnime.css';
+import { jwtDecode } from 'jwt-decode';
 
 export default function AjouterAnime() {
-  const { id } = useParams();
+  const { IdAnime } = useParams();
   const navigate = useNavigate();
   const [note, setNote] = useState(1);
   const [commentaire, setCommentaire] = useState('');
@@ -19,7 +20,10 @@ export default function AjouterAnime() {
     }
 
     try {
-      const res = await fetch(`http://localhost:3001/anime/${id}/comment`, {
+      const decoded = jwtDecode(token);
+      const userId = decoded.id;
+
+      const res = await fetch(`http://localhost:3001/comment/comment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -28,6 +32,8 @@ export default function AjouterAnime() {
         body: JSON.stringify({
           grade: note,
           commentText: commentaire,
+          userId: userId,
+          animeId: IdAnime
         }),
       });
 
@@ -35,7 +41,7 @@ export default function AjouterAnime() {
 
       if (res.ok) {
         setMessage("Commentaire ajouté avec succès !");
-        setTimeout(() => navigate(`/anime/${id}`), 1500);
+        setTimeout(() => navigate(`/DetailAnime/${IdAnime}`), 1500);
       } else {
         setMessage(data.message || "Erreur lors de l'envoi du commentaire.");
       }
@@ -52,7 +58,7 @@ export default function AjouterAnime() {
         <label>
           Note (1 à 5) :
           <select value={note} onChange={(e) => setNote(parseInt(e.target.value))}>
-            {[1, 2, 3, 4, 5].map(n => <option key={n} value={n}>{n}</option>)}
+            {[0,1, 2, 3, 4, 5].map(n => <option key={n} value={n}>{n}</option>)}
           </select>
         </label>
 

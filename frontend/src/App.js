@@ -22,7 +22,7 @@ function App() {
         <Route path="/DetailAnime" element={<DetailAnime />} />
         <Route path="/DetailAnime/:id" element={<DetailAnime />} />
         <Route path="/List" element={<List />} />
-        <Route path="/anime/:id/ajouter" element={<AjouterAnime />} />
+        <Route path="/anime/:IdAnime/ajouter" element={<AjouterAnime />} />
       </Routes>
       <Footer />
     </div>
