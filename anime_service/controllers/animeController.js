@@ -52,3 +52,13 @@ exports.getcomments = async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch comments' });
     }
 }
+
+exports.getcommentsByUser = async (req, res) => {
+    const { userId } = req.params;
+    try {
+        const comments = await Comment.find({ userId }).populate('animeId', 'animeName');
+        res.status(200).json(comments);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch comments by user' });
+    }
+}
