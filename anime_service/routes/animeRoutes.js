@@ -4,7 +4,7 @@ const animeController = require('../controllers/animeController');
 
 router.post('/anime', animeController.postanime);
 router.get('/anime', animeController.getanimes);
-router.get('/anime/:id', animeController.getanime);
+router.get('/DetailAnime/:id', animeController.getanime);
 
 router.post('/comment', animeController.postcomment);
 router.get('/comments/:animeId', animeController.getcomments);

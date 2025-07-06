@@ -1,6 +1,5 @@
 const { Anime, Comment } = require('../models/Anime');
 
-//Anime Controller Functions
 exports.postanime = async (req, res) => {
   const { animeName, animeDescription } = req.body;
     try {

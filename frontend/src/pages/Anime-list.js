@@ -9,7 +9,7 @@ export default function List() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:3001/user/anime')
+    fetch('http://localhost:3001/anime/anime')
       .then(res => {
         if (!res.ok) throw new Error('Erreur lors du chargement des données');
         return res.json();

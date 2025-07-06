@@ -13,5 +13,7 @@ const commentSchema = new mongoose.Schema({
   grade: Number
 });
 
-module.exports = mongoose.model('Anime', animeSchema);
-module.exports = mongoose.model('Comment', commentSchema);
+const Anime = mongoose.model('Anime', animeSchema);
+const Comment = mongoose.model('Comment', commentSchema);
+
+module.exports = { Anime, Comment };
