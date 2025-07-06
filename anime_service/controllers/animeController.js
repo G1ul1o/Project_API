@@ -1,4 +1,5 @@
 const { Anime, Comment } = require('../models/Anime');
+const mongoose = require('mongoose');
 
 exports.postanime = async (req, res) => {
   const { animeName, animeDescription } = req.body;
@@ -31,7 +32,7 @@ exports.getanime = async (req, res) => {
     }
 };
 
-//Comment Controller Functions
+
 exports.postcomment = async (req, res) => {
     const { animeId, userId, commentText, grade } = req.body;
     try {
@@ -45,20 +46,40 @@ exports.postcomment = async (req, res) => {
 
 exports.getcomments = async (req, res) => {
     const { animeId } = req.params;
+   
     try {
-        const comments = await Comment.find({ animeId }).populate('userId', 'username');
+        const comments = await Comment.find({animeId});
+
+        if (comments.length === 0) {
+        return res.status(200).json({
+            message: 'Aucun commentaire trouvé pour cet anime.',
+            comments: []
+        });
+        }
         res.status(200).json(comments);
     } catch (error) {
+        console.error("Erreur lors de la récupération des commentaires :", error);
         res.status(500).json({ error: 'Failed to fetch comments' });
     }
 }
 
 exports.getcommentsByUser = async (req, res) => {
     const { userId } = req.params;
+    console.log(userId)
     try {
-        const comments = await Comment.find({ userId }).populate('animeId', 'animeName');
+        const objectUserId = new mongoose.Types.ObjectId(userId);
+        console.log(objectUserId)
+        const comments = await Comment.find({ userId: objectUserId});
+        console.log(comments)
+        if (comments.length === 0) {
+        return res.status(200).json({
+            message: 'No comments for this anime',
+            comments: []
+        });
+        }
         res.status(200).json(comments);
     } catch (error) {
+        console.log(error)
         res.status(500).json({ error: 'Failed to fetch comments by user' });
     }
 }
