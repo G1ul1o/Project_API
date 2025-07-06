@@ -14,7 +14,6 @@ exports.registerWithGoogle = async (req, res) => {
       return res.status(400).json({ message: "Missing credential or username" });
     }
 
-    // Vérifier le token Google
     const ticket = await client.verifyIdToken({
       idToken: credential,
       audience: process.env.GOOGLE_CLIENT_ID,

@@ -10,7 +10,8 @@ export default function DetailAnime() {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  let avg_score = -1;
+  
 
   useEffect(() => {
     fetch(`http://localhost:3001/anime/DetailAnime/${id}`)
@@ -28,11 +29,10 @@ export default function DetailAnime() {
       });
   }, [id]);
 
- 
   useEffect(() => {
     fetch(`http://localhost:3001/comment/comments/${id}`)
       .then(res => {
-        if (!res.ok) throw new Error('Impossibel to load comments');
+        if (!res.ok) throw new Error('Impossible to load comments');
         return res.json();
       })
       .then(data => {
@@ -43,6 +43,18 @@ export default function DetailAnime() {
         setError(err.message);
       });
   }, [id]);
+
+  if (Array.isArray(comments) && comments.length > 0) {
+    let total = 0;
+    for (let i = 0; i < comments.length; i++) {
+      total += comments[i].grade;
+    }
+    avg_score = total / comments.length;
+
+    if (isNaN(avg_score)) {
+      avg_score = -1;
+    }
+  }
 
   const handleAddToList = () => {
     const token = localStorage.getItem('jwtToken');
@@ -66,13 +78,13 @@ export default function DetailAnime() {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p style={{ color: 'red' }}>{error}</p>;
-  if (!anime) return <p>Aucun détail trouvé pour cet anime.</p>;
+  if (!anime) return <p>No details for this anime.</p>;
 
   return (
     <div className="detail-container">
       <h1 className="detail-title">{anime.animeName}</h1>
       {anime.animeDescription && <p><strong>Description:</strong> {anime.animeDescription}</p>}
-      {anime.avgRating != null && <p><strong>Mean score:</strong> {anime.avgRating}</p>}
+      {anime.avgRating != null && <p><strong>Mean score:</strong> {avg_score}</p>}
 
       <button className="add-button" onClick={handleAddToList}>
         Add to my list
@@ -80,18 +92,17 @@ export default function DetailAnime() {
 
       <Link to="/List" className="back-button">← Back to the list</Link>
 
-      <h2 className="comments-title">Commentaires</h2>
+      <h2 className="comments-title">Comments</h2>
       <ul className="comments-list">
         {comments.length > 0 ? (
           comments.map((c) => (
             <li key={c._id} className="comment-item">
-              {/* <<p><strong>Utilisateur:</strong> {c.username || c.userId?.username || 'Anonyme'}</p> */}
-              <p><strong>Note:</strong> {c.grade}/5</p>
-              <p><strong>Commentaire:</strong> {c.commentText}</p>
+              <p><strong>Grade:</strong> {c.grade}/5</p>
+              <p><strong>Comment:</strong> {c.commentText}</p>
             </li>
           ))
         ) : (
-          <p>No comment for.</p>
+          <p>No comment for this anime</p>
         )}
       </ul>
     </div>

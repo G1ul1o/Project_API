@@ -67,7 +67,7 @@ export default function UserList() {
     }
   }, []);
 
-  if (loading) return <p>loading...</p>;
+  if (loading) return <p>Loading...</p>;
   if (error) return <p style={{ color: 'red' }}>{error}</p>;
 
 return (
@@ -84,7 +84,7 @@ return (
                 <Link to={`/DetailAnime/${comment.animeId}`}>
                   <strong>{anime ? anime.animeName : 'Loading...'}</strong>
                 </Link>
-                <p>comment: {comment.commentText}   </p>
+                <p>Comment: {comment.commentText}</p>
                 <p>Your Grade: {comment.grade}</p>
               </li>
             );

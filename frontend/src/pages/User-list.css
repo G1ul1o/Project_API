@@ -1,0 +1,66 @@
+:root {
+  --primary-bg: #3b3a3a;
+  --secondary-bg: #727272;
+  --text-color: white;
+  --hover-color: #34c309;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --text-title:#34c309;
+}
+
+body {
+  background-color: var(--secondary-bg);
+  color: var(--text-color);
+  font-family: Arial, sans-serif;
+}
+
+.user-anime-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem auto;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.user-anime-item {
+  background-color: #2d2d2d;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  transition: transform 0.2s ease;
+}
+
+.user-anime-item:hover {
+  transform: translateY(-4px);
+}
+
+.user-anime-item a {
+  color: var(--text-title);
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.user-anime-item a:hover {
+  color: var(--hover-color);
+  text-decoration: underline;
+}
+
+.user-anime-item p {
+  margin: 0.5rem 0;
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+h1 {
+  text-align: center;
+  color: var(--text-title);
+  margin-top: 2rem;
+  font-size: 2rem;
+}
+
+p {
+  text-align: center;
+  font-size: 1.1rem;
+}

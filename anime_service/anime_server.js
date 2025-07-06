@@ -12,15 +12,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
-
 mongoose.connect(process.env.MONGODB_URI, {
 }).then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
 
 app.use('/', animeRoutes);
-
 
 const PORT = process.env.PORT || 4001;
 app.listen(PORT, () => {
