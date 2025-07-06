@@ -6,4 +6,7 @@ router.post('/anime', animeController.postanime);
 router.get('/anime', animeController.getanimes);
 router.get('/anime/:id', animeController.getanime);
 
+router.post('/comment', animeController.postcomment);
+router.get('/comments/:animeId', animeController.getcomments);
+
 module.exports = router;
