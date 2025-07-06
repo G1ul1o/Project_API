@@ -8,6 +8,7 @@ import DetailAnime from './pages/Detail-anime';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import List from './pages/Anime-list';
+import AjouterAnime from './pages/AjouterAnime';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/DetailAnime" element={<DetailAnime />} />
         <Route path="/DetailAnime/:id" element={<DetailAnime />} />
         <Route path="/List" element={<List />} />
+        <Route path="/anime/:id/ajouter" element={<AjouterAnime />} />
       </Routes>
       <Footer />
     </div>
