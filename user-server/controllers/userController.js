@@ -1,21 +1,67 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const { OAuth2Client } = require('google-auth-library');
 const { generateToken } = require('../../Authentification/utils/jwt');
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
+exports.registerWithGoogle = async (req, res) => {
+  try {
+    const { credential, privileges, username } = req.body;
+
+    if (!credential || !username) {
+      return res.status(400).json({ message: "Missing credential or username" });
+    }
+
+    // Vérifier le token Google
+    const ticket = await client.verifyIdToken({
+      idToken: credential,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+    const email = payload.email;
+
+    let user = await User.findOne({ email });
+
+    if (user) {
+      return res.status(400).json({ message: 'User already exists with this email' });
+    }
+
+    user = new User({
+      email,
+      username,
+      privileges,
+      password_hash: '',
+    });
+
+    await user.save();
+
+    const token = generateToken(user);
+    res.status(201).json({ user, token });
+
+  } catch (error) {
+    console.error("Erreur Google Register:", error);
+    res.status(500).json({ message: "Erreur serveur lors de l'inscription Google" });
+  }
+};
 
 exports.register = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    console.log("Request received")
+    const { username, email, password, privileges} = req.body;
     const existingUser = await User.findOne({ email });
     if (existingUser) return res.status(400).json({ message: 'Email already in use' });
 
     const password_hash = await bcrypt.hash(password, 10);
-    const user = await User.create({ username, email, password_hash });
+    const user = await User.create({ username, email, password_hash, privileges});
 
     const token = generateToken(user);
     res.status(201).json({ user, token });
   } catch (err) {
-    res.status(500).json({ message: 'Server error' });
-  }
+  console.error('Erreur côté User Microservice:', err);
+  res.status(500).json({ message: 'Server error' });
+}
 };
 
 exports.login = async (req, res) => {
