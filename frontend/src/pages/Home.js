@@ -38,7 +38,7 @@ export default function Home() {
         <div className="home-calltoaction">
           {user ? (
             <div>
-              <p>Bienvenue, <strong>{user.username || user.name || 'Utilisateur'}</strong>!</p>
+              <p>Welcolme, <strong>{user.username || user.name || 'Utilisateur'}</strong>!</p>
               <p>Email : {user.email || 'non disponible'}</p>
             </div>
           ) : (

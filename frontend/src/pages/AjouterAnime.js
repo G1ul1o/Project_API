@@ -15,7 +15,7 @@ export default function AjouterAnime() {
     const token = localStorage.getItem('jwtToken');
 
     if (!token) {
-      alert("Vous devez être connecté.");
+      alert("You need to be logged in.");
       return;
     }
 
@@ -40,40 +40,40 @@ export default function AjouterAnime() {
       const data = await res.json();
 
       if (res.ok) {
-        setMessage("Commentaire ajouté avec succès !");
+        setMessage("Comment added successfully!");
         setTimeout(() => navigate(`/DetailAnime/${IdAnime}`), 1500);
       } else {
-        setMessage(data.message || "Erreur lors de l'envoi du commentaire.");
+        setMessage(data.message || "Error adding comment.");
       }
     } catch (err) {
       console.error(err);
-      setMessage("Erreur réseau.");
+      setMessage("Network error.");
     }
   };
 
   return (
     <div className="ajouter-anime-container">
-      <h2>Ajouter une note et un commentaire</h2>
+      <h2>Add a grade and a comment!</h2>
       <form onSubmit={handleSubmit} className="ajouter-form">
         <label>
-          Note (1 à 5) :
+          Grade (1 to 5) :
           <select value={note} onChange={(e) => setNote(parseInt(e.target.value))}>
             {[0,1, 2, 3, 4, 5].map(n => <option key={n} value={n}>{n}</option>)}
           </select>
         </label>
 
         <label>
-          Commentaire :
+          Comment :
           <textarea
             value={commentaire}
             onChange={(e) => setCommentaire(e.target.value)}
             rows="4"
-            placeholder="Exprimez votre avis..."
+            placeholder="Write what you think..."
             required
           />
         </label>
 
-        <button type="submit">Soumettre</button>
+        <button type="submit">Submit</button>
         {message && <p className="message">{message}</p>}
       </form>
     </div>
