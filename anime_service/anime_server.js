@@ -10,13 +10,13 @@ app.use(express.json());
 
 const jwt_secret = 'jojo-better-than-snk';
 
-mongoose.connect("mongodb://localhost:27018/animelist_db", { useNewUrlParser: true, useUnifiedTopology: true,});
+mongoose.connect("mongodb://localhost:27018/animelist_db");
 
 const animeSchema = new mongoose.Schema({
   animeName: String,
   animeDescription: String,
   avgRating: Number
-});
+}); 
 
 const commentSchema = new mongoose.Schema({
   animeId: { type: mongoose.Schema.Types.ObjectId, ref: 'Anime' },

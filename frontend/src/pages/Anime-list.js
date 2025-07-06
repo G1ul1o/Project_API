@@ -9,7 +9,7 @@ export default function List() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:4001/anime')
+    fetch('http://localhost:3001/user/anime')
       .then(res => {
         if (!res.ok) throw new Error('Erreur lors du chargement des données');
         return res.json();
@@ -32,23 +32,15 @@ export default function List() {
     <div className="list-container">
       <h1 className="list-title">Anime List</h1>
 
-      <input
-        type="text"
-        placeholder="Search anime..."
-        value={search}
-        onChange={e => setSearch(e.target.value)}
-        className="search-bar"
-      />
+      <input type="text" placeholder="Search anime..." value={search} onChange={e => setSearch(e.target.value)} className="search-bar"/>
 
-      {loading && <p>Chargement...</p>}
+      {loading && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
       <ul className="anime-list">
         {filteredAnime.map(anime => (
           <li key={anime._id} className="anime-item">
-            <Link to={`/DetailAnime/${anime._id}`} className="anime-link">
-              {anime.animeName}
-            </Link>
+            <Link to={`/DetailAnime/${anime._id}`} className="anime-link">{anime.animeName}</Link>
           </li>
         ))}
       </ul>
