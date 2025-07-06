@@ -1,5 +1,5 @@
-const {Anime,Comment} = require('../models/Anime');
-    
+const { Anime, Comment } = require('../models/Anime');
+
 exports.postanime = async (req, res) => {
   const { animeName, animeDescription } = req.body;
     try {
@@ -30,3 +30,25 @@ exports.getanime = async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch anime' });
     }
 };
+
+//Comment Controller Functions
+exports.postcomment = async (req, res) => {
+    const { animeId, userId, commentText, grade } = req.body;
+    try {
+        const newComment = new Comment({ animeId, userId, commentText, grade });
+        await newComment.save();
+        res.status(201).json(newComment);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to create comment' });
+    }
+};
+
+exports.getcomments = async (req, res) => {
+    const { animeId } = req.params;
+    try {
+        const comments = await Comment.find({ animeId }).populate('userId', 'username');
+        res.status(200).json(comments);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch comments' });
+    }
+}

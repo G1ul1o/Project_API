@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+require('dotenv').config();
 
 const animeRoutes = require('./routes/animeRoutes');
 
@@ -19,6 +20,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 // Routes anime
 app.use('/', animeRoutes);
+
 
 const PORT = process.env.PORT || 4001;
 app.listen(PORT, () => {
