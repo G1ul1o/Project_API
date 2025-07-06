@@ -1,5 +1,5 @@
-const User = require('../models/Anime');
-
+const {Anime,Comment} = require('../models/Anime');
+    
 exports.postanime = async (req, res) => {
   const { animeName, animeDescription } = req.body;
     try {

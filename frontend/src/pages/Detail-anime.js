@@ -9,7 +9,7 @@ export default function DetailAnime() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/user/anime/${id}`)
+    fetch(`http://localhost:3001/anime/DetailAnime/${id}`)
       .then(res => {
         if (!res.ok) throw new Error('Anime not found');
         return res.json();
