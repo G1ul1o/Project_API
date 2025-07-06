@@ -34,7 +34,46 @@ const apiGatewayMiddlewareAnime = async (req, res, next) => {
     console.log("Anime Gateway - req.path:", req.path);
     console.log("Anime Gateway - req.originalUrl:", req.originalUrl);
 
-    const validPaths = ["/anime"];
+    const validPaths = ["/anime", "/DetailAnime"];
+   
+    const isValidPath = validPaths.some(p => req.path === p || req.path.startsWith(p + "/"));
+
+    if (!isValidPath) {
+      return res.status(404).json({ message: "Not found request path, not handled by the API Gateway" });
+    }
+
+    console.log(`Redirecting to Anime Microservice: ${req.path}`);
+
+    const fetchOptions = {
+      method: req.method,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": req.headers.authorization || "",
+      },
+    };
+
+    if (req.method !== "GET" && req.method !== "HEAD") {
+      fetchOptions.body = JSON.stringify(req.body);
+    }
+
+    const response = await fetch(`${animeMicroServiceUrl}${req.path}`, fetchOptions);
+    const data = await response.json();
+
+    res.status(response.status).json(data);
+
+  } catch (error) {
+    console.error("Error in API Gateway Anime Middleware:", error);
+    res.status(500).json({ message: "Server error in API Gateway Anime Middleware" });
+  }
+};
+
+const apiGatewayMiddlewareCommentaires = async (req, res, next) => {
+  try {
+    const animeMicroServiceUrl = "http://localhost:4001";
+    console.log("Anime Gateway - req.path:", req.path);
+    console.log("Anime Gateway - req.originalUrl:", req.originalUrl);
+
+    const validPaths = ["/comment","/comments"];
    
     const isValidPath = validPaths.some(p => req.originalUrl === p || req.originalUrl.startsWith(p + "/"));
 
@@ -67,4 +106,4 @@ const apiGatewayMiddlewareAnime = async (req, res, next) => {
   }
 };
 
-module.exports = { apiGatewayMiddlewareUser, apiGatewayMiddlewareAnime };
+module.exports = { apiGatewayMiddlewareUser, apiGatewayMiddlewareAnime,apiGatewayMiddlewareCommentaires };
