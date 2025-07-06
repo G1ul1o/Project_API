@@ -34,7 +34,7 @@ const apiGatewayMiddlewareAnime = async (req, res, next) => {
     console.log("Anime Gateway - req.path:", req.path);
     console.log("Anime Gateway - req.originalUrl:", req.originalUrl);
 
-    const validPaths = ["/anime", "/DetailAnime"];
+    const validPaths = ["/anime", "/DetailAnime","/comment"];
    
     const isValidPath = validPaths.some(p => req.path === p || req.path.startsWith(p + "/"));
 
@@ -73,12 +73,12 @@ const apiGatewayMiddlewareCommentaires = async (req, res, next) => {
     console.log("Anime Gateway - req.path:", req.path);
     console.log("Anime Gateway - req.originalUrl:", req.originalUrl);
 
-    const validPaths = ["/comment","/comments"];
+    const validPaths = ["/comment","/comments","/anime/comment"];
    
     const isValidPath = validPaths.some(p => req.originalUrl === p || req.originalUrl.startsWith(p + "/"));
 
     if (!isValidPath) {
-      return res.status(404).json({ message: "Not found request path, not handled by the API Gateway" });
+      return res.status(404).json({ message: "Not found request path for comment part, not handled by the API Gateway" });
     }
 
     console.log(`Redirecting to Anime Microservice: ${req.path}`);
