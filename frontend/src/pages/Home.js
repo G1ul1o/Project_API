@@ -1,6 +1,18 @@
 import './Home.css';
+import {jwtDecode} from 'jwt-decode';
 
 export default function Home() {
+   let token = localStorage.getItem('jwtToken');
+  let user = null;
+
+  try {
+    if (token) {
+      user = jwtDecode(token);
+    }
+  } catch (error) {
+    user = null;
+  }
+  
   return (
     <div className="home-container">
       <div className="home-content">
@@ -20,12 +32,20 @@ export default function Home() {
           </p>
           <p>
             📊 Rate your favorite anime and share your thoughts with the community.
-          </p>          
-        </div>
-        <div className="home-calltoaction">
-          <p>
-            <a href="/Register" className="home-link">Join now</a> or <a href="/Login" className="home-link">log in</a> to get started!
           </p>
+        </div>
+
+        <div className="home-calltoaction">
+          {user ? (
+            <div>
+              <p>Bienvenue, <strong>{user.username || user.name || 'Utilisateur'}</strong>!</p>
+              <p>Email : {user.email || 'non disponible'}</p>
+            </div>
+          ) : (
+            <p>
+              <a href="/Register" className="home-link">Join now</a> or <a href="/Login" className="home-link">log in</a> to get started!
+            </p>
+          )}
         </div>
       </div>
     </div>
