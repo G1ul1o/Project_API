@@ -11,7 +11,7 @@ export default function List() {
   useEffect(() => {
     fetch('http://localhost:3001/anime/anime')
       .then(res => {
-        if (!res.ok) throw new Error('Erreur lors du chargement des données');
+        if (!res.ok) throw new Error('Error occured when loading the informations');
         return res.json();
       })
       .then(data => {
