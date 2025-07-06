@@ -7,11 +7,11 @@ const apiGatewayMiddleware = async (req, res, next) => {
     console.log(req.path)
     console.log("req.originalUrl:", req.originalUrl)
     
-    const validPaths = ["/register", "/login","/google-register"];
-    if (!validPaths.includes(req.path)) {
-      return res.status(404).json({ message: "Not found request, not take in charge from the API" });
-    }
+    const validPaths = ["/register", "/login", "/register/google", "/login/google"];
 
+    if (!validPaths.some(p => req.path.endsWith(p))) {
+      return res.status(404).json({ message: "Not found request path, not taken in charge by the API" });
+    }
     console.log(`Redirection vers le User-MicroService : ${req.path}`);
 
     const response = await fetch(`${userMicroServiceUrl}${req.path}`, {

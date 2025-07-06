@@ -1,3 +1,4 @@
+require('dotenv').config({ path: '../.env' });
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const { OAuth2Client } = require('google-auth-library');
@@ -77,5 +78,43 @@ exports.login = async (req, res) => {
     res.json({ user, token });
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
+  }
+};
+
+exports.loginwithgoogle = async (req, res) => {
+  const { googleToken } = req.body;
+  if (!googleToken) {
+    return res.status(400).json({ message: 'Google token is required' });
+  }
+
+  try {
+   
+    const ticket = await client.verifyIdToken({
+      idToken: googleToken,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+    const { email, name, sub: googleId } = payload;
+
+    if (!email) {
+      return res.status(400).json({ message: 'Email not found in Google token' });
+    }
+
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+    
+      return res.status(404).json({ message: 'User not found. Please register first.' });
+    }
+
+    const token = generateToken(user);
+
+    return res.status(200).json({ user, token });
+
+  } catch (error) {
+    console.error('Google login error:', error);
+    return res.status(401).json({ message: 'Invalid Google token' });
   }
 };
