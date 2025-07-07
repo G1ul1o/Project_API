@@ -13,7 +13,6 @@ export default function Login({ onLoginSuccess }) {
 
   const apiBaseUrl = 'http://localhost:3001/user/login';
 
-  // Login classique
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -46,12 +45,10 @@ export default function Login({ onLoginSuccess }) {
     }
   };
 
-  // Login via Google
   const handleGoogleLogin = async (credentialResponse) => {
     try {
       const token = credentialResponse.credential;
 
-      // Optionnel: décoder token JWT pour récupérer infos utilisateur si besoin
       const base64Url = token.split('.')[1];
       const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
       const jsonPayload = decodeURIComponent(
@@ -61,10 +58,8 @@ export default function Login({ onLoginSuccess }) {
           .join('')
       );
       const userInfo = JSON.parse(jsonPayload);
-      // userInfo.email, userInfo.name etc.
 
-      // Appel backend login Google
-      const res = await fetch(`${apiBaseUrl}/google`, {  // À adapter selon ton backend
+      const res = await fetch(`${apiBaseUrl}/google`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ googleToken: token }),

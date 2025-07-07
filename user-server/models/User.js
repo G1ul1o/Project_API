@@ -25,11 +25,7 @@ const userSchema = new mongoose.Schema({
   privileges: {
     type: Number,
     default: 0
-  },
-  list_anime: {
-    type: [String],
-    default: [],
-  },
+  }
 });
 
 module.exports = mongoose.model('User', userSchema);

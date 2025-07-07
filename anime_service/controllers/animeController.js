@@ -52,13 +52,13 @@ exports.getcomments = async (req, res) => {
 
         if (comments.length === 0) {
         return res.status(200).json({
-            message: 'Aucun commentaire trouvé pour cet anime.',
+            message: 'No comments found for this anime.',
             comments: []
         });
         }
         res.status(200).json(comments);
     } catch (error) {
-        console.error("Erreur lors de la récupération des commentaires :", error);
+        console.error("Error fetching comments:", error);
         res.status(500).json({ error: 'Failed to fetch comments' });
     }
 }
