@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 
 const animeSchema = new mongoose.Schema({
   animeName: String,
-  animeDescription: String,
-  avgRating: Number
+  animeDescription: String
 }); 
 
 const commentSchema = new mongoose.Schema({
